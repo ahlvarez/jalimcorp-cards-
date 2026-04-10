@@ -204,6 +204,48 @@
       border: 0;
     }
 
+    /* ── Save Contact button ── */
+    .save-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.9rem 1.25rem;
+      margin-bottom: 1.25rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 0.85rem;
+      color: var(--text);
+      font-family: "Manrope", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 180ms ease, border-color 180ms ease, transform 150ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .save-btn:hover,
+    .save-btn:focus-visible {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.28);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .save-btn:active {
+      transform: translateY(0);
+    }
+
+    .save-btn svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
     @media (min-width: 640px) {
       body {
         padding: 2rem;
@@ -236,6 +278,21 @@
 
       <section class="section" aria-labelledby="contact-title">
         <span class="sr-only" id="contact-title">Contact links</span>
+
+        <!-- ── Save Contact button — replace placeholders before deploying ── -->
+        <!-- Replace [EMPLOYEE_FULL_NAME] in the aria-label below -->
+        <button
+          type="button"
+          class="save-btn"
+          onclick="downloadVCard()"
+          aria-label="Save [EMPLOYEE_FULL_NAME] as a contact"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 16L6.5 10.5L7.9 9.1L11 12.2V3H13V12.2L16.1 9.1L17.5 10.5L12 16ZM4 21V19H20V21H4Z"/>
+          </svg>
+          Save Contact
+        </button>
+
         <div class="contact-grid">
           <!-- Replace [EMAIL_ADDRESS] with the real email address -->
           <a
@@ -301,5 +358,39 @@
       <footer class="footer">JALIMCORP</footer>
     </article>
   </main>
+
+  <script>
+    /* ── Save Contact — vCard download ──────────────────────────────────────
+       Replace each placeholder with the employee's real data before deploying:
+         [EMPLOYEE_FULL_NAME]  — e.g. Jane Smith
+         [COMPANY_NAME]        — e.g. JALIMCORP
+         [PHONE_NUMBER]        — e.g. +260971234567  (include country code)
+         [EMAIL_ADDRESS]       — e.g. jane.smith@jalimcorp.com
+         [COMPANY_WEBSITE]     — e.g. https://jalimcorp.com
+         [VCF_FILENAME]        — e.g. jane-smith.vcf
+    ──────────────────────────────────────────────────────────────────────── */
+    function downloadVCard() {
+      var vcard = [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        'FN:[EMPLOYEE_FULL_NAME]',
+        'ORG:[COMPANY_NAME]',
+        'TEL;TYPE=CELL:[PHONE_NUMBER]',
+        'EMAIL;TYPE=INTERNET:[EMAIL_ADDRESS]',
+        'URL:[COMPANY_WEBSITE]',
+        'END:VCARD'
+      ].join('\r\n');
+
+      var blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+      var url  = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href     = url;
+      link.download = '[VCF_FILENAME]';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+  </script>
 </body>
 </html>
