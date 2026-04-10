@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jerson Huamani | Digital Business Card</title>
+  <meta name="description" content="Digital business card for Jerson Huamani, Director at JALIMCORP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:   #000000;
+      --panel:   #0c0c0c;
+      --surface: #141414;
+      --white:   #ffffff;
+      --muted:   rgba(255,255,255,0.55);
+      --red:     #E10600;
+      --red-dim: rgba(225,6,0,0.15);
+      --line:    rgba(255,255,255,0.1);
+      --card-w:  28rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      background: var(--black);
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem;
+    }
+
+    /* ── Card shell ── */
+    .card {
+      width: min(100%, var(--card-w));
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 1.75rem;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 0.5px rgba(255,255,255,0.04) inset;
+    }
+
+    /* ── Header ── */
+    .header {
+      padding: 2.5rem 2rem 2rem;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%);
+      text-align: center;
+      position: relative;
+    }
+
+    .header::after {
+      content: "";
+      display: block;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .name {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 9vw, 3rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .accent-rule {
+      width: 2.5rem;
+      height: 3px;
+      background: var(--red);
+      border-radius: 2px;
+      margin: 1rem auto 0;
+    }
+
+    /* ── Role badge ── */
+    .role-wrap {
+      padding: 1.25rem 2rem;
+      text-align: center;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .role {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .role-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* ── Portrait ── */
+    .portrait-wrap {
+      padding: 2rem 2rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      background: var(--panel);
+    }
+
+    .portrait-frame {
+      position: relative;
+      width: min(100%, 15rem);
+    }
+
+    .portrait-frame::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 1.25rem;
+      background: linear-gradient(145deg, rgba(225,6,0,0.4), rgba(255,255,255,0.06), transparent 60%);
+      z-index: 0;
+    }
+
+    .portrait {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 1.25rem;
+      filter: grayscale(100%);
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+    }
+
+    /* ── Contact buttons ── */
+    .contact-section {
+      padding: 1.5rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      width: 100%;
+      padding: 0.95rem 1.4rem;
+      border-radius: 0.9rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--surface);
+      transition: background 180ms ease, border-color 180ms ease, transform 150ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn.primary {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    .btn.primary:hover,
+    .btn.primary:focus-visible {
+      background: #c90500;
+      border-color: #c90500;
+    }
+
+    .btn-icon {
+      width: 1.15rem;
+      height: 1.15rem;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .btn-label {
+      flex: 1;
+    }
+
+    .btn-arrow {
+      opacity: 0.45;
+      font-size: 0.85rem;
+    }
+
+    /* ── Logo / footer ── */
+    .footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      background: var(--black);
+      -webkit-tap-highlight-color: transparent;
+      transition: opacity 180ms ease, transform 150ms ease;
+    }
+
+    .logo-link:hover,
+    .logo-link:focus-visible {
+      opacity: 0.75;
+      transform: scale(1.04);
+      outline: none;
+    }
+
+    .logo-link:active {
+      transform: scale(1);
+    }
+
+    .logo {
+      max-width: 7rem;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(1.2);
+      display: block;
+    }
+
+    .company-name {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <article class="card" aria-label="Digital business card for Jerson Huamani">
+
+    <header class="header">
+      <h1 class="name">Jerson Huamani</h1>
+      <div class="accent-rule" aria-hidden="true"></div>
+    </header>
+
+    <div class="role-wrap">
+      <p class="role">
+        <span class="role-dot" aria-hidden="true"></span>
+        Director
+        <span class="role-dot" aria-hidden="true"></span>
+      </p>
+    </div>
+
+    <div class="portrait-wrap">
+      <div class="portrait-frame">
+        <img
+          class="portrait"
+          src="https://raw.githubusercontent.com/ahlvarez/jalimcorp-cards-/refs/heads/main/1552581197994.jpeg"
+          alt="Portrait of Jerson Huamani"
+        >
+      </div>
+    </div>
+
+    <nav class="contact-section" aria-label="Contact Jerson Huamani">
+      <a class="btn primary" href="mailto:jerson.huamani@jalimcorp.com">
+        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2.25 6.75A2.25 2.25 0 0 1 4.5 4.5h15A2.25 2.25 0 0 1 21.75 6.75v10.5A2.25 2.25 0 0 1 19.5 19.5h-15a2.25 2.25 0 0 1-2.25-2.25V6.75Zm1.73-.35 7.33 5.44a1.2 1.2 0 0 0 1.38 0l7.33-5.44H3.98Zm16.27 1.82-6.66 4.94a2.7 2.7 0 0 1-3.18 0L3.75 8.22v9.03c0 .41.34.75.75.75h15c.41 0 .75-.34.75-.75V8.22Z"/>
+        </svg>
+        <span class="btn-label">Send an Email</span>
+        <span class="btn-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="btn" href="https://wa.me/260961959501" target="_blank" rel="noreferrer">
+        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.04 2.25c-5.38 0-9.74 4.24-9.74 9.48 0 1.68.45 3.33 1.32 4.78L2.25 21.75l5.42-1.41a9.88 9.88 0 0 0 4.37 1.01h.01c5.38 0 9.71-4.24 9.71-9.49 0-2.54-1.01-4.93-2.83-6.72a9.83 9.83 0 0 0-6.89-2.89Zm0 17.51h-.01a8.18 8.18 0 0 1-4.16-1.13l-.3-.18-3.22.84.86-3.1-.2-.32a7.87 7.87 0 0 1-1.22-4.14c0-4.35 3.7-7.9 8.25-7.9 2.2 0 4.26.84 5.81 2.37a7.8 7.8 0 0 1 2.39 5.53c0 4.36-3.67 7.93-8.2 7.93Zm4.52-5.96c-.25-.12-1.47-.72-1.7-.8-.23-.08-.39-.12-.56.12-.16.24-.65.8-.79.96-.15.16-.29.18-.54.06-.25-.12-1.05-.38-2-1.22-.74-.66-1.24-1.47-1.38-1.71-.14-.24-.02-.37.1-.49.11-.1.25-.26.37-.39.12-.14.16-.24.25-.4.08-.16.04-.3-.02-.42-.06-.12-.56-1.32-.77-1.8-.2-.48-.41-.41-.56-.42h-.48c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 1.99 0 1.17.87 2.3.99 2.46.12.16 1.7 2.68 4.2 3.65.59.25 1.05.39 1.41.5.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.47-.28Z"/>
+        </svg>
+        <span class="btn-label">Message on WhatsApp</span>
+        <span class="btn-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="btn" href="https://www.linkedin.com/in/jerson-huamani-rojas-0a819237/" target="_blank" rel="noreferrer">
+        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.94 8.25A1.69 1.69 0 1 0 6.94 4.88a1.69 1.69 0 0 0 0 3.37ZM5.44 9.56h3v9.94h-3V9.56Zm4.88 0h2.87v1.36h.04c.4-.75 1.38-1.55 2.84-1.55 3.04 0 3.61 1.89 3.61 4.35v5.78h-3v-5.12c0-1.22-.02-2.78-1.8-2.78-1.8 0-2.07 1.33-2.07 2.69v5.21h-3V9.56Z"/>
+        </svg>
+        <span class="btn-label">Connect on LinkedIn</span>
+        <span class="btn-arrow" aria-hidden="true">↗</span>
+      </a>
+    </nav>
+
+    <footer class="footer">
+      <a
+        class="logo-link"
+        href="https://jalimcorp.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit the JALIMCORP website"
+      >
+        <img
+          class="logo"
+          src="https://raw.githubusercontent.com/ahlvarez/jalimcorp-cards-/refs/heads/main/Screenshot%202026-04-02%20at%2018.37.43.png"
+          alt="JALIMCORP logo"
+        >
+      </a>
+      <span class="company-name">JALIMCORP</span>
+    </footer>
+
+  </article>
+</body>
+</html>
